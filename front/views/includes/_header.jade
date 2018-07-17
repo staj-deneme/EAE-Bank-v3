@@ -1,0 +1,23 @@
+header.app-header
+	a.app-header__logo(href='/') EAE Farm
+
+	// Sidebar toggle button
+	a.app-sidebar__toggle(href='#', data-toggle='sidebar', aria-label="Hide Sidebar")
+
+	// Navbar Right Menu
+	ul.app-nav
+
+		
+		// User Menu
+		li.dropdown
+			a.app-nav__item(href='#', data-toggle='dropdown' aria-label="Open Profile Menu")
+				i.fa.fa-user.fa-lg
+			ul.dropdown-menu.settings-menu.dropdown-menu-right
+				li
+					a.dropdown-item(href='/profile')
+						i.fa.fa-user.fa-lg
+						|  Profile
+				li
+					a.dropdown-item(href='/logout')
+						i.fa.fa-sign-out-alt.fa-lg
+						|  Logout

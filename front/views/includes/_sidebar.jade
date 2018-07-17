@@ -1,0 +1,38 @@
+.app-sidebar__overlay(data-toggle="sidebar")
+aside.app-sidebar
+
+	.app-sidebar__user
+		img.app-sidebar__user-avatar(src='images/eae.png',style="width:210px;", alt='User Image')
+		br
+	div(style="color: white;text-align: center;margin-bottom: 15px;")
+		p.app-sidebar__user-name #{account.name} #{account.surName}
+
+	ul.app-menu
+		li
+			a.app-menu__item(href='/')
+				i.app-menu__icon.fa.fa-home
+				span.app-menu__label Anasayfa
+
+		li
+			a.app-menu__item(href='/hayvan-yem-al')
+				i.app-menu__icon.fa.fa-shopping-cart
+				span.app-menu__label Hayvan/Yem Al
+		
+		li
+			a.app-menu__item(href='/altin-islem')
+				i.app-menu__icon.fa.fa-shopping-cart
+				span.app-menu__label Altın Al/Sat
+
+		li
+			a.app-menu__item(href='/urun-sat')
+				i.app-menu__icon.fa.fa-shopping-cart
+				span.app-menu__label Ürünleri Sat
+
+		//li
+			a.app-menu__item(href='/blank')
+				i.app-menu__icon.fa.fa-file
+				span.app-menu__label Blank Page
+		li
+			a.app-menu__item(href='/logout')
+				i.app-menu__icon.fa.fa-sign-out-alt
+				span.app-menu__label Çıkış Yap

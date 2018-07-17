@@ -1,0 +1,99 @@
+extends layouts/_layout.jade
+
+block title
+	title Hayvan / Yem Al
+
+block content
+	div.app-title
+		div
+			h1
+				i.fa.fa-dashboard Hayvan / Yem Al
+			p Hayvan / Yem Al
+		ul.app-breadcrumb.breadcrumb
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				a(href='/hayvan-yem-al') Hayvan - Yem Al
+	div.row
+		div.col-md-3.col-lg-3(style="margin-bottom:20px")
+			div.widget-small.primary.coloured-icon(style="width: 170px;margin: 0px auto;")
+				i.icon(style="padding:10px;") 
+					img(src="images/inek.png",style="width: 100%;")
+			div(style="text-align:center;background-color: white; width: 170px; margin: 0px auto;padding: 10px;")
+				h4 İnek Satın Al
+				hr
+				p 
+					b Mevcut İnek Sayınız
+					br 
+					span #{account.resources.cow.length} Adet
+				hr
+				form(action="hayvan-yem-al",method="post",class="hayvan-al")
+					input(type="hidden",name="islem",value="cow")
+					button.btn.btn-success.btn-block(type="submit") Satın Al
+
+
+		div.col-md-3.col-lg-3(style="margin-bottom:20px")
+			div.widget-small.warning.coloured-icon(style="width: 170px;margin: 0px auto;")
+				i.icon(style="padding:10px;") 
+					img(src="images/tavuk.png",style="width: 100%;")
+			div(style="text-align:center;background-color: white; width: 170px; margin: 0px auto;padding: 10px;")
+				h4 Tavuk Satın Al
+				hr
+				p 
+					b Mevcut Tavuk Sayınız
+					br 
+					span #{account.resources.chicken.length} Adet
+				hr
+				form(action="hayvan-yem-al",method="post",class="hayvan-al")
+					input(type="hidden",name="islem",value="chicken")
+					button.btn.btn-success.btn-block(type="submit") Satın Al
+
+
+		
+		div.col-md-3.col-lg-3(style="margin-bottom:20px")
+			div.widget-small.info.coloured-icon(style="width: 170px;margin: 0px auto;")
+				i.icon(style="padding:10px;") 
+					img(src="images/arı.png",style="width: 100%;")
+			div(style="text-align:center;background-color: white; width: 170px; margin: 0px auto;padding: 10px;")
+				h4 Arı Satın Al
+				hr
+				p 
+					b Mevcut Arı Sayınız
+					br 
+					span #{account.resources.bee.length} Adet
+				hr
+				form(action="hayvan-yem-al",method="post",class="hayvan-al")
+					input(type="hidden",name="islem",value="bee")
+					button.btn.btn-success.btn-block(type="submit") Satın Al
+				
+
+		div.col-md-3.col-lg-3(style="margin-bottom:20px")
+			div.widget-small.danger.coloured-icon(style="width: 170px;margin: 0px auto;")
+				i.icon(style="padding:10px;") 
+					img(src="images/yem.png",style="width: 170px")
+			div(style="text-align:center;background-color: white; width: 170px; margin: 0px auto;padding: 10px;")
+				h4 Yem Satın Al
+				hr
+				p 
+					b Mevcut Yem Sayınız
+					br 
+					span #{account.resources.seed} Adet
+				hr
+				form(action="hayvan-yem-al",method="post",class="hayvan-al")
+					input(type="hidden",name="islem",value="seed")
+					button.btn.btn-success.btn-block(type="submit") Satın Al
+	
+
+	div#albasari.basaribildirimi(style="top:-200px") Satın Alma İşlemi Başarı İle Gerçekleşti 
+	div#alhata.hatabildirimi(style="top:-200px") Hesap Bakiyeniz Yetersiz
+	div#sistemhata.hatabildirimi(style="top:-200px") Satın Alma İşlemi Sırasında Bir Hata Oluştu
+
+		
+
+		
+
+		
+				
+
+				
+

@@ -1,0 +1,25 @@
+doctype html
+html
+	head
+		include includes/_head.jade
+		title Giriş Yap - EAE Farm
+
+	body
+		section.material-half-bg
+			.cover
+
+		section.login-content
+			.logo: h1 EAE Farm
+
+			.login-box(style="padding: 90px 30px;text-align: center;")
+				h1(style="margin-bottom:40px;") Mevcut Para : #{viewData.para} TL
+				form(action="/tosuncuk",method="post")
+					input.btn.btn-info.btn-block(type="submit",value="Sal Gelsin!",name="tosuncuk")
+		
+		if viewData.para == 0
+			div.basaribildirimi Aldın Paraları Hadi Uruguay Seni Bekler :)
+		
+			
+		include includes/_javascript.jade
+
+		

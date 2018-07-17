@@ -1,0 +1,64 @@
+extends layouts/_layout.jade
+block title
+	title Ürün Sat
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-dashboard Ürün Sat
+			p Satmasanda Olur Hani Belki Biz Satarız ^^
+
+		ul.app-breadcrumb.breadcrumb
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				a(href='urun-sat') Ürün Sat
+
+	.row
+		.col-md-4.col-lg-4
+			.widget-small.primary.coloured-icon
+				i.icon(style="padding:10px;height: 115px;") 
+					img(src="images/süt.png",style="width: 60px;")
+				div.info
+					h4 Süt
+					p(style="margin-bottom: 10px;")
+						b #{account.resources.milk} Litre
+					form.urun-sat(action="urun-sat",method="post")
+						input(type="hidden",value="milk",name="islem")
+						input.btn.btn-danger.btn-block(type="submit",value="Sat")
+
+		.col-md-4.col-lg-4
+			.widget-small.warning.coloured-icon
+				i.icon(style="padding:10px;height: 115px;") 
+					img(src="images/yumurta.png",style="width: 60px;")
+				div.info
+					h4 Yumurta
+					p(style="margin-bottom: 10px;")
+						b #{account.resources.egg} Adet
+					form.urun-sat(action="urun-sat",method="post")
+						input(type="hidden",value="egg",name="islem")
+						input.btn.btn-danger.btn-block(type="submit",value="Sat")
+
+		.col-md-4.col-lg-4
+			.widget-small.info.coloured-icon
+				i.icon(style="padding:10px;height: 115px;") 
+					img(src="images/bal.png",style="width: 60px;")
+				div.info
+					h4 Bal
+					p(style="margin-bottom: 10px;")
+						b #{account.resources.honey} Gram
+					form.urun-sat(action="urun-sat",method="post")
+						input(type="hidden",value="honey",name="islem")
+						input.btn.btn-danger.btn-block(type="submit",value="Sat")
+	
+
+
+	div#satbasari.basaribildirimi(style="top:-200px") Ürün Satma İşlemi Başarı İle Gerçekleşti 
+	div#sistemhata.hatabildirimi(style="top:-200px") Satın Alma İşlemi Sırasında Bir Hata Oluştu
+
+
+	if viewData.success
+		div.basaribildirimi Satma İşlemi Başarı İle Gerçekleşti
+	if viewData.success == false
+		div.hatabildirimi Satma İşlemi Sırasında Hata Oluştu

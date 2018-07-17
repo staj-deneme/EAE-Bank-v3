@@ -1,0 +1,98 @@
+extends layouts/_layout
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-dashboard
+				|  Anasayfa
+			p Siz İnek, tavuk vs. alınki bizde bunların parasını alıp yurtdışına kaçabilelim :D
+
+		ul.app-breadcrumb.breadcrumb
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				a(href='/') Anasayfa
+
+
+	//.row
+		.col-md-12.danger Yeminiz Bitti
+
+	.row
+		.col-md-6.col-lg-3
+			.widget-small.primary.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/inek.png",style="width: 60px;")
+				div.info
+					h4 İnek
+					p
+						b #{account.resources.cow.length} Adet
+
+		.col-md-6.col-lg-3
+			.widget-small.warning.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/tavuk.png",style="width: 60px;")
+				div.info
+					h4 Tavuk
+					p
+						b #{account.resources.chicken.length} Adet
+
+		.col-md-6.col-lg-3
+			.widget-small.info.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/arı.png",style="width: 60px;")
+				div.info
+					h4 Arı
+					p
+						b #{account.resources.bee.length} Adet
+
+		.col-md-6.col-lg-3
+			.widget-small.danger.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/altın.png",style="width: 60px;")
+				div.info
+					h4 Altın
+					p
+						b #{account.resources.coin} Adet
+		
+	.row
+		.col-md-6.col-lg-3
+			.widget-small.primary.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/süt.png",style="width: 60px;")
+				div.info
+					h4 Süt
+					p
+						b #{account.resources.milk} Litre
+
+		.col-md-6.col-lg-3
+			.widget-small.warning.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/yumurta.png",style="width: 60px;")
+				div.info
+					h4 Yumurta
+					p
+						b #{account.resources.egg} Adet
+
+		.col-md-6.col-lg-3
+			.widget-small.info.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/bal.png",style="width: 60px;")
+				div.info
+					h4 Bal
+					p
+						b #{account.resources.honey} gram
+
+		.col-md-6.col-lg-3
+			.widget-small.danger.coloured-icon
+				i.icon(style="padding:10px;") 
+					img(src="images/yem.png",style="width: 60px;")
+				div.info
+					h4 Yem
+					p
+						b #{account.resources.seed} Adet
+	
+
+	
+	
+		

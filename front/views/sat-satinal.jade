@@ -1,0 +1,52 @@
+extends layouts/_layout.jade
+
+block title
+    title Altın Al/Sat
+
+block content
+    .app-title
+        div
+            h1
+                i.fa.fa-dashboard
+                |  Altın Al/Sat
+            p Satmasan daha iyi ama sen bilirsin ^^
+
+        ul.app-breadcrumb.breadcrumb
+            li.breadcrumb-item
+                i.fa.fa-home.fa-lg
+            li.breadcrumb-item
+                a(href='altin-islem') Altın Al-Sat
+
+    .row
+        .col-md-6
+            .tile
+                .tile-body
+                    h2 Altın Satın Al
+                form(id="altin-al")
+                    .form-group
+                        label Satın Alınacak Miktar
+                        input.form-control(type="number",name="miktar",placeholder="Satın Alınacak Miktar",required)
+                    .form-group
+                        input.btn.btn-primary.pull-right(type="submit",value="Satın Al")
+
+        .col-md-6
+            .tile
+                .tile-body
+                    h2 Altın Sat
+                form(action="altin-islem-sat",method="post",id="altin-sat")
+                    .form-group
+                        label Satılacak Miktar
+                        input.form-control(type="number",name="miktar",placeholder="Satılacak Miktar",required)
+                    .form-group
+                        input.btn.btn-primary.pull-right(type="submit",value="Sat")
+    
+    
+    div#satinalbasari.basaribildirimi(style="top:-200px") Satın Alma İşlemi Başarı İle Gerçekleşti
+    div#satinalhata.hatabildirimi(style="top:-200px") Satın Alma İşlemi Sırasında Bir Hata Oluştu
+    div#satbasari.basaribildirimi(style="top:-200px") Satma İşlemi Başarı İle Gerçekleşti
+    div#sathata.hatabildirimi(style="top:-200px") Girdiğiniz Sayı Bakiyenizden Fazla
+    div#sistemhata.hatabildirimi(style="top:-200px") Satma İşlemi Sırasında Bir Hata Oluştu
+
+    
+
+        
