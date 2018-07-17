@@ -45,6 +45,8 @@ if (process.env.SELECTED_DATABASE == "mongoDB") {
 
 } else if (process.env.SELECTED_DATABASE == "json") {
     storage.initSync();
+    console.log("Json Bağlantı Tamam");
+    
 } 
 
 

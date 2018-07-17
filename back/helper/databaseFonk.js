@@ -44,6 +44,9 @@ module.exports = {
                 var member = {
                     name: data.name,
                     surName: data.surName,
+                    age: data.age,
+                    city: data.city,
+                    gender: data.gender,
                     userName: data.userName,
                     password: data.password,
                     eMail: data.eMail,

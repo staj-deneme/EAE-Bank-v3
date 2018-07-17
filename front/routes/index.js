@@ -58,7 +58,7 @@ router.get('/', middleware.requireAuthentication, function (req, res, next) {
 // Login İşleminin Yapıldığı Post İşlemi
 router.post('/', function (req, res, next) {
     const { userName, password } = req.body;
-    
+
     request({
         url: apiLink + "/userControl",
         json: true,
@@ -90,6 +90,9 @@ router.post('/register', function (req, res, next) {
     const member = {
         name: req.body.ad,
         surName: req.body.soyad,
+        age: req.body.yas,
+        city: req.body.sehir,
+        gender: req.body.cinsiyet,
         userName: req.body.kadi,
         password: req.body.sifre,
         eMail: req.body.eposta
@@ -232,7 +235,7 @@ router.post('/hayvan-yem-al', middleware.requireAuthentication, function (req, r
                 req.session.account.resources = body.rData;
                 res.send({ status: 201 });
 
-            }else {
+            } else {
                 res.send({ status: body.status });
             }
         }
@@ -264,7 +267,7 @@ router.post('/urun-sat', middleware.requireAuthentication, function (req, res, n
                 req.session.account.resources = body.rData;
                 res.send({ status: 201 });
 
-            }else {
+            } else {
                 res.send({ status: body.status });
             }
         }
