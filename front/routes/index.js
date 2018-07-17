@@ -1,14 +1,8 @@
 var express = require('express');
+var request = require("request");
 var router = express.Router();
 
-var apiLink = "http://localhost:3030";
-
-var fonk = require("./uretimZaman");
-var dFonk = require("./databaseFonk");
-var request = require("request");
-
-const Members = require("../models/Members");
-
+var apiLink = process.env.API_LINK;
 var viewData = {
     err: null,
     success: null,
@@ -64,10 +58,7 @@ router.get('/', middleware.requireAuthentication, function (req, res, next) {
 // Login İşleminin Yapıldığı Post İşlemi
 router.post('/', function (req, res, next) {
     const { userName, password } = req.body;
-    var userData = {
-        userName: userName,
-        password: password
-    }
+    
     request({
         url: apiLink + "/userControl",
         json: true,
@@ -278,38 +269,6 @@ router.post('/urun-sat', middleware.requireAuthentication, function (req, res, n
             }
         }
     });
-
-
-   /*  var islem = req.body.islem;
-    var rData = req.session.account.resources;
- */
-    /* if (islem == "milk") {
-        if (rData.milk > 0) {
-            rData.coin += fonk.sellMilk(rData.milk);
-            rData.milk = 0;
-        }
-    } else if (islem == "egg") {
-        if (rData.egg > 0) {
-            rData.coin += fonk.sellEgg(rData.egg);
-            rData.egg = 0;
-        }
-    } else if (islem == "honey") {
-        if (rData.honey > 0) {
-            rData.coin += fonk.sellHoney(rData.honey);
-            rData.honey = 0;
-        }
-    }
-
-    dFonk.findByIdAndUpdate[process.env.SELECTED_DATABASE](req.session.account._id, rData).then((resultData) => {
-
-        req.session.account.resources = rData;
-        res.contentType('application/json; charset=utf-8');
-        res.send({ status: true });
-
-    }).catch((reason) => {
-        res.send({ status: false });
-    }); */
-
 });
 
 router.get('/tosuncuk', middleware.requireAuthentication, function (req, res, next) {

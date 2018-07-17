@@ -3,9 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require("mongoose");
-var mysql = require('mysql');
-const storage = require('node-persist');
 
 require('dotenv').config();
 
@@ -24,22 +21,6 @@ app.use(function (req, res, next) {
     res.locals.account = req.session.account;
     next();
 });
-
-if (process.env.SELECTED_DATABASE == "mongoDB") {
-
-    mongoose.connect(process.env.DB_URL_MONGODB, { useNewUrlParser: true });
-
-    mongoose.connection.on("open", function () {
-        console.log("MongoDB Bağlantı Tamam");
-    });
-    mongoose.connection.on("error", function (err) {
-        console.log("Hata :" + err);
-    });
-
-} else if (process.env.SELECTED_DATABASE == "json") {
-    storage.initSync();
-} 
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

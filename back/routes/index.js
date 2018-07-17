@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var dFonk = require("./databaseFonk.js");
-var fonk = require("./uretimZaman");
+var dFonk = require("../helper/databaseFonk.js");
+var fonk = require("../helper/uretimZaman");
 
 function uretimKaynak(data, id) {
     return new Promise(function (resolve, reject) {
