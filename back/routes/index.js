@@ -17,8 +17,11 @@ function uretimKaynak(data, id) {
             olmeyecekler.cow = [];
             for (var j = 0; j < rData.cow.length; j++) {
 
-                dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));
-                difDeath = fonk.diffMin(new Date(), new Date(rData.cow[j].death));
+                dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));//son beslenmeden beri geçen zaman
+                if(parseInt(dif/10)>=1){
+                    rData.cow[j].death=fonk.upTime(rData.cow[j].death,parseInt(dif/10));//ömür kısaltma
+                }
+                difDeath = fonk.diffMin(new Date(), new Date(rData.cow[j].death));//yaşamış olduğu süre
                 difTotal = fonk.deathCow() - fonk.diffMin(new Date(rData.cow[j].cal), new Date(rData.cow[j].death));
 
                 if (difDeath >= fonk.deathCow()) {
@@ -32,11 +35,9 @@ function uretimKaynak(data, id) {
                     }
                 } else {
                     if (rData.seed >= fonk.eatSeedCow(dif)) {
-                        if (dif >= 1) {
                             rData.milk = parseInt(rData.milk) + parseInt(fonk.cowMilk(dif));
                             rData.cow[j].cal = new Date();
                             rData.seed -= fonk.eatSeedCow(dif);
-                        }
                     }
                     olmeyecekler.cow.push(rData.cow[j]);
                 }
@@ -50,6 +51,9 @@ function uretimKaynak(data, id) {
             for (var j = 0; j < rData.chicken.length; j++) {
 
                 dif = fonk.diffMin(new Date(), new Date(rData.chicken[j].cal));
+                if(parseInt(dif/10)>=1){
+                    rData.chicken[j].death=fonk.upTime(rData.chicken[j].death,parseInt(dif/10));//ömür kısaltma
+                }
                 difDeath = fonk.diffMin(new Date(), new Date(rData.chicken[j].death));
                 difTotal = fonk.deathChicken() - fonk.diffMin(new Date(rData.chicken[j].cal), new Date(rData.chicken[j].death));
 
@@ -64,11 +68,9 @@ function uretimKaynak(data, id) {
                     }
                 } else {
                     if (rData.seed >= fonk.eatSeedChicken(dif)) {
-                        if (dif >= 1) {
                             rData.egg = parseInt(rData.egg) + parseInt(fonk.chickenEgg(dif));
                             rData.chicken[j].cal = new Date();
                             rData.seed -= fonk.eatSeedChicken(dif);
-                        }
                     }
                     olmeyecekler.chicken.push(rData.chicken[j]);
                 }
@@ -82,6 +84,9 @@ function uretimKaynak(data, id) {
             for (var j = 0; j < rData.bee.length; j++) {
 
                 dif = fonk.diffMin(new Date(), new Date(rData.bee[j].cal));
+                if(parseInt(dif/10)>=1){
+                    rData.bee[j].death=fonk.upTime(rData.bee[j].death,parseInt(dif/10));//ömür kısaltma
+                }
                 difDeath = fonk.diffMin(new Date(), new Date(rData.bee[j].death));
                 difTotal = fonk.deathBee() - fonk.diffMin(new Date(rData.bee[j].cal), new Date(rData.bee[j].death));
 
@@ -96,11 +101,9 @@ function uretimKaynak(data, id) {
                     }
                 } else {
                     if (rData.seed >= fonk.eatSeedBee(dif)) {
-                        if (dif >= 1) {
                             rData.honey = parseInt(rData.honey) + parseInt(fonk.beeHoney(dif));
                             rData.bee[j].cal = new Date();
                             rData.seed -= fonk.eatSeedBee(dif);
-                        }
                     }
                     olmeyecekler.bee.push(rData.bee[j]);
                 }

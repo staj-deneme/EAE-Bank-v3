@@ -55,4 +55,14 @@ deathChicken:function(){//tavuk 15 dk yaşasın
 deathBee:function(){//arı 10 dk yaşasın
     return 5;
 },
+
+//hayvanların yaşam süresini beslenmediği zamana göre güncelleme
+//aç kaldığı her 10 dk için 1dk ömür kısalcak(death+=1dk)
+upTime:function(time,x){
+    //time güncellencek zaman,, x kaç dakika güncellenecek
+    var  zaman=time.getTime();
+    zaman+=(60*1000)*x;
+    var tamp=new Date(zaman);
+    return tamp    
+}
 };
