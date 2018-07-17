@@ -1,4 +1,5 @@
 const Members = require("../models/Members");
+const UserLogs = require("../models/UserLogs");
 const storage = require('node-persist');
 var mysql = require('mysql');
 
@@ -184,6 +185,79 @@ module.exports = {
                     else {
                         resolve(rData);
                     }
+                });
+            });
+        }
+    },
+    logOlustur: {
+        mongoDB: function (data) {
+            return new Promise((resolve, reject) => {
+                data = new UserLogs(data);
+                data.save((err, data) => {
+                    if (err) { reject("mukerrer"); }
+                    else { resolve(data); }
+                });
+
+            });
+        },
+        json: function (data) {
+            return new Promise((resolve, reject) => {
+
+                storage.initSync();
+                var accounts = storage.getItemSync("Members");
+                var mukerrer = false;
+
+                if (accounts == null) { accounts = []; }
+
+                var member = {
+                    name: data.name,
+                    surName: data.surName,
+                    age: data.age,
+                    city: data.city,
+                    gender: data.gender,
+                    userName: data.userName,
+                    password: data.password,
+                    eMail: data.eMail,
+                    resources: {
+                        coin: 0,
+                        milk: 0,
+                        egg: 0,
+                        honey: 0,
+                        seed: 0,
+                        cow: [],
+                        chicken: [],
+                        bee: []
+                    }
+                };
+                accounts.forEach(account => {
+                    if (data.userName == account.userName || data.eMail == account.eMail) {
+                        mukerrer = true;
+                    }
+                });
+                if (mukerrer == false) {
+                    accounts.push(member);
+                    storage.setItemSync("Members", accounts);
+                    resolve(member);
+                } else {
+                    reject("mukerrer");
+                }
+            });
+        },
+        mysql: function (data) {
+            return new Promise((resolve, reject) => {
+                data.resources = JSON.stringify({
+                    coin: 0,
+                    milk: 0,
+                    egg: 0,
+                    honey: 0,
+                    seed: 0,
+                    cow: [],
+                    chicken: [],
+                    bee: []
+                });
+                connection.query('INSERT INTO members SET ?', data, (err, res) => {
+                    if (err) reject("mukerrer");
+                    else resolve(res.insertId);
                 });
             });
         }

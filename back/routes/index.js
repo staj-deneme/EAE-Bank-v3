@@ -18,6 +18,9 @@ function uretimKaynak(data, id) {
             for (var j = 0; j < rData.cow.length; j++) {
 
                 dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));
+
+
+
                 difDeath = fonk.diffMin(new Date(), new Date(rData.cow[j].death));
                 difTotal = fonk.deathCow() - fonk.diffMin(new Date(rData.cow[j].cal), new Date(rData.cow[j].death));
 
@@ -43,7 +46,6 @@ function uretimKaynak(data, id) {
             }
             rData.cow = olmeyecekler.cow;
         }
-
 
         if (rData.chicken != null) {
             olmeyecekler.chicken = [];
@@ -121,7 +123,7 @@ function uretimKaynak(data, id) {
 router.get('/', function (req, res, next) {
 
     res.redirect("http://localhost:3000/");
-    
+
 });
 
 router.post('/userCreate', function (req, res, next) {
@@ -185,11 +187,18 @@ router.post('/requireAuthentication', function (req, res, next) {
 
 router.post('/userUpdate', function (req, res, next) {
 
-    const { id, rData } = req.body;
+    const { id, rData } = req.body.islemler;
+    const log = req.body.loglar;
 
     dFonk.findByIdAndUpdate[process.env.SELECTED_DATABASE](id, rData).then((resultData) => {
 
-        res.json({ status: 201, rData: rData });
+        dFonk.logOlustur[process.env.SELECTED_DATABASE](log).then((result) => {
+
+            res.json({ status: 201, rData: rData });
+
+        }).catch((reason) => {
+                res.json({ status: 499 });
+        });
 
     }).catch((reason) => {
         res.json({ status: 409 });
@@ -198,7 +207,9 @@ router.post('/userUpdate', function (req, res, next) {
 
 router.post('/buyAnimalFeed', function (req, res, next) {
 
-    let { id, islem, rData } = req.body;
+    let { id, islem, rData } = req.body.islemler;
+
+    let log = req.body.loglar;
 
     var minCoin = 0;
 
@@ -227,7 +238,14 @@ router.post('/buyAnimalFeed', function (req, res, next) {
 
         dFonk.findByIdAndUpdate[process.env.SELECTED_DATABASE](id, rData).then((resultData) => {
 
-            res.json({ status: 201, rData: rData });
+            dFonk.logOlustur[process.env.SELECTED_DATABASE](log).then((result) => {
+
+                res.json({ status: 201, rData: rData });
+
+            }).catch((reason) => {
+                    res.json({ status: 499 });
+            });
+
 
         }).catch((reason) => {
             res.json({ status: 409 });
@@ -239,7 +257,8 @@ router.post('/buyAnimalFeed', function (req, res, next) {
 
 router.post('/sellProducts', function (req, res, next) {
 
-    let { id, islem, rData } = req.body;
+    let { id, islem, rData } = req.body.islemler;
+    let log = req.body.loglar;
 
     if (rData[islem] > 0) {
         rData.coin += fonk.sellMilk(rData[islem]);
@@ -248,7 +267,13 @@ router.post('/sellProducts', function (req, res, next) {
 
     dFonk.findByIdAndUpdate[process.env.SELECTED_DATABASE](id, rData).then((resultData) => {
 
-        res.json({ status: 201, rData: rData });
+        dFonk.logOlustur[process.env.SELECTED_DATABASE](log).then((result) => {
+
+            res.json({ status: 201, rData: rData });
+
+        }).catch((reason) => {
+                res.json({ status: 409 });
+        });
 
     }).catch((reason) => {
         res.json({ status: 409 });

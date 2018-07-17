@@ -121,7 +121,8 @@ router.post('/register', function (req, res, next) {
 router.get('/login', function (req, res, next) {
     var data = {
         hata: false,
-        kayitSuccess: null
+        kayitSuccess: null,
+        loginSuccess: null
     };
     res.render('page-login', { viewData: data });
 });
@@ -150,8 +151,28 @@ router.post('/altin-islem-al', middleware.requireAuthentication, function (req, 
         url: apiLink + "/userUpdate",
         json: true,
         body: {
-            id: req.session.account._id,
-            rData: rData
+            islemler: {
+                id: req.session.account._id,
+                rData: rData
+            },
+            loglar: {
+                name: req.session.account.name,
+                surName: req.session.account.surName,
+                age: req.session.account.age,
+                city: req.session.account.city,
+                gender: req.session.account.gender,
+                userName: req.session.account.userName,
+                logs: {
+                    logType: "buyCoin",
+                    buyCoin: req.body.miktar,
+                    sellCoin: 0,
+                    buyAnimal: "none",
+                    sellProducts: {
+                        productType: "none",
+                        amountProduct: 0
+                    }
+                }
+            }
         },
         method: "post"
     }, function (error, response, body) {
@@ -184,8 +205,28 @@ router.post('/altin-islem-sat', function (req, res, next) {
             url: apiLink + "/userUpdate",
             json: true,
             body: {
-                id: req.session.account._id,
-                rData: rData
+                islemler: {
+                    id: req.session.account._id,
+                    rData: rData
+                },
+                loglar: {
+                    name: req.session.account.name,
+                    surName: req.session.account.surName,
+                    age: req.session.account.age,
+                    city: req.session.account.city,
+                    gender: req.session.account.gender,
+                    userName: req.session.account.userName,
+                    logs: {
+                        logType: "sellCoin",
+                        buyCoin: 0,
+                        sellCoin: req.body.miktar,
+                        buyAnimal: "none",
+                        sellProducts: {
+                            productType: "none",
+                            amountProduct: 0
+                        }
+                    }
+                }
             },
             method: "post"
         }, function (error, response, body) {
@@ -217,13 +258,35 @@ router.get('/hayvan-yem-al', middleware.requireAuthentication, function (req, re
 // Hayvan Ve Yem Aldırma İşlemleri
 router.post('/hayvan-yem-al', middleware.requireAuthentication, function (req, res, next) {
 
+
+
     request({
         url: apiLink + "/buyAnimalFeed",
         json: true,
         body: {
-            id: req.session.account._id,
-            islem: req.body.islem,
-            rData: req.session.account.resources
+            islemler: {
+                id: req.session.account._id,
+                islem: req.body.islem,
+                rData: req.session.account.resources
+            },
+            loglar: {
+                name: req.session.account.name,
+                surName: req.session.account.surName,
+                age: req.session.account.age,
+                city: req.session.account.city,
+                gender: req.session.account.gender,
+                userName: req.session.account.userName,
+                logs: {
+                    logType: "buyAnimal",
+                    buyCoin: 0,
+                    sellCoin: 0,
+                    buyAnimal: req.body.islem,
+                    sellProducts: {
+                        productType: "none",
+                        amountProduct: 0
+                    }
+                }
+            }
         },
         method: "post"
     }, function (error, response, body) {
@@ -253,9 +316,29 @@ router.post('/urun-sat', middleware.requireAuthentication, function (req, res, n
         url: apiLink + "/sellProducts",
         json: true,
         body: {
-            id: req.session.account._id,
-            islem: req.body.islem,
-            rData: req.session.account.resources
+            islemler: {
+                id: req.session.account._id,
+                islem: req.body.islem,
+                rData: req.session.account.resources
+            },
+            loglar:{
+                name: req.session.account.name,
+                surName: req.session.account.surName,
+                age: req.session.account.age,
+                city: req.session.account.city,
+                gender: req.session.account.gender,
+                userName: req.session.account.userName,
+                logs: {
+                    logType: "sellProducts",
+                    buyCoin: 0,
+                    sellCoin: 0,
+                    buyAnimal: 0,
+                    sellProducts: {
+                        productType: req.body.islem,
+                        amountProduct: req.session.account.resources[req.body.islem]
+                    }
+                }
+            }
         },
         method: "post"
     }, function (error, response, body) {
