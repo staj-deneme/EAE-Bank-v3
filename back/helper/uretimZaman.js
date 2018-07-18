@@ -11,15 +11,15 @@ diffMin:function (dt1, dt2)
 
 
 //üretim fonkları
-//time dk cinsinden
-cowMilk:function (time){//inek dakikada 1lt süt üretsin
-    return time/1;
+//time dk cinsinden,, oran bonus
+cowMilk:function (time,oran){//inek dakikada 1lt süt üretsin
+    return oran*(time/1);
 },
-chickenEgg:function (time){//tavuk dakikada 1 yumurta üretsin
-return time/1;
+chickenEgg:function (time,oran){//tavuk dakikada 1 yumurta üretsin
+return oran*(time/1);
 },
-beeHoney:function (time){//arı dakikada 1br bal üretsin
-return time/1;
+beeHoney:function (time,oran){//arı dakikada 1br bal üretsin
+return oran*(time/1);
 },
 
 //satış fonkları
