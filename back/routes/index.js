@@ -16,8 +16,12 @@ function uretimKaynak(data, id) {
         if (rData.cow != null) {
             olmeyecekler.cow = [];
             for (var j = 0; j < rData.cow.length; j++) {
+                //hayvan sayısına göre bonus
                 var oran=1;
-                if(rData.cow.length>=10){   oran=1,2;} else if(rData.cow.length>=10){   oran=1,5;}else if(rData.cow.length>=10){   oran=2;}
+                if(rData.cow.length>=10 && rData.cow.length<20){   oran=1,2;} 
+                else if(rData.cow.length>=20 && rData.cow.length<30){   oran=1,5;}
+                else if(rData.cow.length>=30){   oran=2;}
+                //
                 dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));//son beslenmeden beri geçen zaman
                 if(parseInt(dif/10)>=1){
                     rData.cow[j].death=fonk.upTime(rData.cow[j].death,parseInt(dif/10));//ömür kısaltma
