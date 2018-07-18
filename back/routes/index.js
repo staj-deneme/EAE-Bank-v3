@@ -54,6 +54,12 @@ function uretimKaynak(data, id) {
         if (rData.chicken != null) {
             olmeyecekler.chicken = [];
             for (var j = 0; j < rData.chicken.length; j++) {
+                //hayvan sayısına göre bonus
+                var oran=1;
+                if(rData.chicken.length>=10 && rData.chicken.length<20){   oran=1,2;} 
+                else if(rData.chicken.length>=20 && rData.chicken.length<30){   oran=1,5;}
+                else if(rData.chicken.length>=30){   oran=2;}
+                //
 
                 dif = fonk.diffMin(new Date(), new Date(rData.chicken[j].cal));
                 if(parseInt(dif/10)>=1){
@@ -87,6 +93,12 @@ function uretimKaynak(data, id) {
 
             olmeyecekler.bee = [];
             for (var j = 0; j < rData.bee.length; j++) {
+                //hayvan sayısına göre bonus
+                var oran=1;
+                if(rData.bee.length>=10 && rData.bee.length<20){   oran=1,2;} 
+                else if(rData.bee.length>=20 && rData.bee.length<30){   oran=1,5;}
+                else if(rData.bee.length>=30){   oran=2;}
+                //
 
                 dif = fonk.diffMin(new Date(), new Date(rData.bee[j].cal));
                 if(parseInt(dif/10)>=1){
