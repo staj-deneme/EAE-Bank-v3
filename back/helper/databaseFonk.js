@@ -204,59 +204,24 @@ module.exports = {
             return new Promise((resolve, reject) => {
 
                 storage.initSync();
-                var accounts = storage.getItemSync("Members");
-                var mukerrer = false;
+                var logs = storage.getItemSync("UserLogs");
+                if (logs == null) { logs = []; }
 
-                if (accounts == null) { accounts = []; }
+                var log = data;
 
-                var member = {
-                    name: data.name,
-                    surName: data.surName,
-                    age: data.age,
-                    city: data.city,
-                    gender: data.gender,
-                    userName: data.userName,
-                    password: data.password,
-                    eMail: data.eMail,
-                    resources: {
-                        coin: 0,
-                        milk: 0,
-                        egg: 0,
-                        honey: 0,
-                        seed: 0,
-                        cow: [],
-                        chicken: [],
-                        bee: []
-                    }
-                };
-                accounts.forEach(account => {
-                    if (data.userName == account.userName || data.eMail == account.eMail) {
-                        mukerrer = true;
-                    }
-                });
-                if (mukerrer == false) {
-                    accounts.push(member);
-                    storage.setItemSync("Members", accounts);
-                    resolve(member);
-                } else {
-                    reject("mukerrer");
-                }
+                logs.push(log);
+                storage.setItemSync("UserLogs", logs);
+                resolve(log);
+
             });
         },
         mysql: function (data) {
             return new Promise((resolve, reject) => {
-                data.resources = JSON.stringify({
-                    coin: 0,
-                    milk: 0,
-                    egg: 0,
-                    honey: 0,
-                    seed: 0,
-                    cow: [],
-                    chicken: [],
-                    bee: []
-                });
-                connection.query('INSERT INTO members SET ?', data, (err, res) => {
-                    if (err) reject("mukerrer");
+                
+                data.logs = JSON.stringify(data.logs);
+
+                connection.query('INSERT INTO userlogs SET ?', data, (err, res) => {
+                    if (err) reject(err);
                     else resolve(res.insertId);
                 });
             });

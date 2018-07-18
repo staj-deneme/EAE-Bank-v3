@@ -18,9 +18,6 @@ function uretimKaynak(data, id) {
             for (var j = 0; j < rData.cow.length; j++) {
 
                 dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));
-
-
-
                 difDeath = fonk.diffMin(new Date(), new Date(rData.cow[j].death));
                 difTotal = fonk.deathCow() - fonk.diffMin(new Date(rData.cow[j].cal), new Date(rData.cow[j].death));
 
@@ -197,7 +194,7 @@ router.post('/userUpdate', function (req, res, next) {
             res.json({ status: 201, rData: rData });
 
         }).catch((reason) => {
-                res.json({ status: 499 });
+            res.json({ status: 499 });
         });
 
     }).catch((reason) => {
@@ -243,7 +240,7 @@ router.post('/buyAnimalFeed', function (req, res, next) {
                 res.json({ status: 201, rData: rData });
 
             }).catch((reason) => {
-                    res.json({ status: 499 });
+                res.json({ status: 499 });
             });
 
 
@@ -272,7 +269,7 @@ router.post('/sellProducts', function (req, res, next) {
             res.json({ status: 201, rData: rData });
 
         }).catch((reason) => {
-                res.json({ status: 409 });
+            res.json({ status: 409 });
         });
 
     }).catch((reason) => {
