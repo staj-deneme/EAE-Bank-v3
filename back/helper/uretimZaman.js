@@ -47,13 +47,13 @@ eatSeedBee:function(time){//arı dkda 1 yem
 
 // Hayvanların Ölüm Süreleri
 deathCow:function(){//inek 20 dk yaşasın
-    return 5;
+    return 10;
 },
 deathChicken:function(){//tavuk 15 dk yaşasın
-    return 5;
+    return 10;
 },
 deathBee:function(){//arı 10 dk yaşasın
-    return 5;
+    return 10;
 },
 
 //hayvanların yaşam süresini beslenmediği zamana göre güncelleme

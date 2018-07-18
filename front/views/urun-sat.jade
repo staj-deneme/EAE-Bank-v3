@@ -23,7 +23,7 @@ block content
 				div.info
 					h4 Süt
 					p(style="margin-bottom: 10px;")
-						b #{account.resources.milk} Litre
+						b #{parseInt(account.resources.milk)} Litre
 					form.urun-sat(action="urun-sat",method="post")
 						input(type="hidden",value="milk",name="islem")
 						input.btn.btn-danger.btn-block(type="submit",value="Sat")
@@ -35,7 +35,7 @@ block content
 				div.info
 					h4 Yumurta
 					p(style="margin-bottom: 10px;")
-						b #{account.resources.egg} Adet
+						b #{parseInt(account.resources.egg)} Adet
 					form.urun-sat(action="urun-sat",method="post")
 						input(type="hidden",value="egg",name="islem")
 						input.btn.btn-danger.btn-block(type="submit",value="Sat")
@@ -47,7 +47,7 @@ block content
 				div.info
 					h4 Bal
 					p(style="margin-bottom: 10px;")
-						b #{account.resources.honey} Gram
+						b #{parseInt(account.resources.honey)} Gram
 					form.urun-sat(action="urun-sat",method="post")
 						input(type="hidden",value="honey",name="islem")
 						input.btn.btn-danger.btn-block(type="submit",value="Sat")
