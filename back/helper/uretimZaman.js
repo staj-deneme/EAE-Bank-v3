@@ -11,15 +11,15 @@ diffMin:function (dt1, dt2)
 
 
 //üretim fonkları
-//time dk cinsinden
-cowMilk:function (time){//inek dakikada 1lt süt üretsin
-    return time/1;
+//time dk cinsinden,, oran bonus
+cowMilk:function (time,oran){//inek dakikada 1lt süt üretsin
+    return oran*(time/1);
 },
-chickenEgg:function (time){//tavuk dakikada 1 yumurta üretsin
-return time/1;
+chickenEgg:function (time,oran){//tavuk dakikada 1 yumurta üretsin
+return oran*(time/1);
 },
-beeHoney:function (time){//arı dakikada 1br bal üretsin
-return time/1;
+beeHoney:function (time,oran){//arı dakikada 1br bal üretsin
+return oran*(time/1);
 },
 
 //satış fonkları
@@ -55,4 +55,14 @@ deathChicken:function(){//tavuk 15 dk yaşasın
 deathBee:function(){//arı 10 dk yaşasın
     return 5;
 },
+
+//hayvanların yaşam süresini beslenmediği zamana göre güncelleme
+//aç kaldığı her 10 dk için 1dk ömür kısalcak(death+=1dk)
+upTime:function(time,x){
+    //time güncellencek zaman,, x kaç dakika güncellenecek
+    var  zaman=time.getTime();
+    zaman+=(60*1000)*x;
+    var tamp=new Date(zaman);
+    return tamp    
+}
 };

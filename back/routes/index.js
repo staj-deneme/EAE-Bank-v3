@@ -16,15 +16,23 @@ function uretimKaynak(data, id) {
         if (rData.cow != null) {
             olmeyecekler.cow = [];
             for (var j = 0; j < rData.cow.length; j++) {
-
-                dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));
-                difDeath = fonk.diffMin(new Date(), new Date(rData.cow[j].death));
+                //hayvan sayısına göre bonus
+                var oran=1;
+                if(rData.cow.length>=10 && rData.cow.length<20){   oran=1,2;} 
+                else if(rData.cow.length>=20 && rData.cow.length<30){   oran=1,5;}
+                else if(rData.cow.length>=30){   oran=2;}
+                //
+                dif = fonk.diffMin(new Date(), new Date(rData.cow[j].cal));//son beslenmeden beri geçen zaman
+                if(parseInt(dif/10)>=1){
+                    rData.cow[j].death=fonk.upTime(rData.cow[j].death,parseInt(dif/10));//ömür kısaltma
+                }
+                difDeath = fonk.diffMin(new Date(), new Date(rData.cow[j].death));//yaşamış olduğu süre
                 difTotal = fonk.deathCow() - fonk.diffMin(new Date(rData.cow[j].cal), new Date(rData.cow[j].death));
 
                 if (difDeath >= fonk.deathCow()) {
                     if (rData.seed >= fonk.eatSeedCow(dif)) {
                         if (difTotal > 0) {
-                            rData.milk = parseInt(rData.milk) + parseInt(fonk.cowMilk(difTotal));
+                            rData.milk = parseInt(rData.milk) + parseInt(fonk.cowMilk(difTotal,oran));
                             if (rData.seed >= fonk.eatSeedCow(difTotal)) {
                                 rData.seed -= fonk.eatSeedCow(difTotal)
                             }
@@ -32,11 +40,9 @@ function uretimKaynak(data, id) {
                     }
                 } else {
                     if (rData.seed >= fonk.eatSeedCow(dif)) {
-                        if (dif >= 1) {
-                            rData.milk = parseInt(rData.milk) + parseInt(fonk.cowMilk(dif));
+                            rData.milk = parseInt(rData.milk) + parseInt(fonk.cowMilk(dif,oran));
                             rData.cow[j].cal = new Date();
                             rData.seed -= fonk.eatSeedCow(dif);
-                        }
                     }
                     olmeyecekler.cow.push(rData.cow[j]);
                 }
@@ -47,15 +53,24 @@ function uretimKaynak(data, id) {
         if (rData.chicken != null) {
             olmeyecekler.chicken = [];
             for (var j = 0; j < rData.chicken.length; j++) {
+                //hayvan sayısına göre bonus
+                var oran=1;
+                if(rData.chicken.length>=10 && rData.chicken.length<20){   oran=1,2;} 
+                else if(rData.chicken.length>=20 && rData.chicken.length<30){   oran=1,5;}
+                else if(rData.chicken.length>=30){   oran=2;}
+                //
 
                 dif = fonk.diffMin(new Date(), new Date(rData.chicken[j].cal));
+                if(parseInt(dif/10)>=1){
+                    rData.chicken[j].death=fonk.upTime(rData.chicken[j].death,parseInt(dif/10));//ömür kısaltma
+                }
                 difDeath = fonk.diffMin(new Date(), new Date(rData.chicken[j].death));
                 difTotal = fonk.deathChicken() - fonk.diffMin(new Date(rData.chicken[j].cal), new Date(rData.chicken[j].death));
 
                 if (difDeath >= fonk.deathChicken()) {
                     if (rData.seed >= fonk.eatSeedChicken(dif)) {
                         if (difTotal > 0) {
-                            rData.egg = parseInt(rData.egg) + parseInt(fonk.chickenEgg(difTotal));
+                            rData.egg = parseInt(rData.egg) + parseInt(fonk.chickenEgg(difTotal,oran));
                             if (rData.seed >= fonk.eatSeedChicken(difTotal)) {
                                 rData.seed -= fonk.eatSeedChicken(difTotal)
                             }
@@ -63,11 +78,9 @@ function uretimKaynak(data, id) {
                     }
                 } else {
                     if (rData.seed >= fonk.eatSeedChicken(dif)) {
-                        if (dif >= 1) {
-                            rData.egg = parseInt(rData.egg) + parseInt(fonk.chickenEgg(dif));
+                            rData.egg = parseInt(rData.egg) + parseInt(fonk.chickenEgg(dif,oran));
                             rData.chicken[j].cal = new Date();
                             rData.seed -= fonk.eatSeedChicken(dif);
-                        }
                     }
                     olmeyecekler.chicken.push(rData.chicken[j]);
                 }
@@ -79,15 +92,24 @@ function uretimKaynak(data, id) {
 
             olmeyecekler.bee = [];
             for (var j = 0; j < rData.bee.length; j++) {
+                //hayvan sayısına göre bonus
+                var oran=1;
+                if(rData.bee.length>=10 && rData.bee.length<20){   oran=1,2;} 
+                else if(rData.bee.length>=20 && rData.bee.length<30){   oran=1,5;}
+                else if(rData.bee.length>=30){   oran=2;}
+                //
 
                 dif = fonk.diffMin(new Date(), new Date(rData.bee[j].cal));
+                if(parseInt(dif/10)>=1){
+                    rData.bee[j].death=fonk.upTime(rData.bee[j].death,parseInt(dif/10));//ömür kısaltma
+                }
                 difDeath = fonk.diffMin(new Date(), new Date(rData.bee[j].death));
                 difTotal = fonk.deathBee() - fonk.diffMin(new Date(rData.bee[j].cal), new Date(rData.bee[j].death));
 
                 if (difDeath >= fonk.deathBee()) {
                     if (rData.seed >= fonk.eatSeedBee(dif)) {
                         if (difTotal > 0) {
-                            rData.honey = parseInt(rData.honey) + parseInt(fonk.beeHoney(difTotal));
+                            rData.honey = parseInt(rData.honey) + parseInt(fonk.beeHoney(difTotal,oran));
                             if (rData.seed >= fonk.eatSeedBee(difTotal)) {
                                 rData.seed -= fonk.eatSeedBee(difTotal)
                             }
@@ -95,11 +117,9 @@ function uretimKaynak(data, id) {
                     }
                 } else {
                     if (rData.seed >= fonk.eatSeedBee(dif)) {
-                        if (dif >= 1) {
-                            rData.honey = parseInt(rData.honey) + parseInt(fonk.beeHoney(dif));
+                            rData.honey = parseInt(rData.honey) + parseInt(fonk.beeHoney(dif,oran));
                             rData.bee[j].cal = new Date();
                             rData.seed -= fonk.eatSeedBee(dif);
-                        }
                     }
                     olmeyecekler.bee.push(rData.bee[j]);
                 }
